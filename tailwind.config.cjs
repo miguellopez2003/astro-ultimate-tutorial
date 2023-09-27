@@ -26,6 +26,7 @@ module.exports = {
 
         palepeach: "#FFE8D6",
         naranjamedio: "#EB984E",
+        red: "#910711",
       },
     },
   },

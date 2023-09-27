@@ -7,7 +7,7 @@ const { blok } = Astro.props;
 <div {...storyblokEditable(blok)}>
   <a
     href={blok.nav_link.cached_url === "home" ? "/" : blok.nav_link.cached_url}
-    class="nav-link text-[14px] sm:text-[15px] text-black1 font-Inter font-medium leading-[16px] sm:leading-[18px] tracking-tight cursor-pointer hover:text-naranjamedio"
+    class="nav-link text-[14px] sm:text-[15px] text-black1 font-Inter font-medium leading-[16px] sm:leading-[18px] tracking-tight cursor-pointer hover:text-red"
     >{blok.nav_link_label}</a
   >
 </div>

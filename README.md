@@ -1,4 +1,4 @@
-## Sand Tech Landing Page project
+## InterApp Landing Page project
 
 This project is built using Astro and Storyblok.
 
@@ -35,4 +35,4 @@ Create a pull request to merge your changes into the main repository.
 
 ### Credits
 
-This project was created by the Sand Tech dev team.
+This project was created by the InterApp dev team.
