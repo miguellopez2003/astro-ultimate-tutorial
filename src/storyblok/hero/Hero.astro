@@ -1,0 +1,196 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import ButtonItem from "../ButtonItem.astro";
+
+const { blok } = Astro.props;
+console.log(blok);
+---
+
+<div {...storyblokEditable(blok)}>
+  <style>
+    /* Estilo base de la sección */
+    .color-transition {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animación de la transición de colores */
+    @keyframes gradientAnimation {
+      0% {
+        background: radial-gradient(
+          at top right,
+          rgba(245, 203, 167, 0.25),
+          rgba(235, 152, 78, 0.35),
+          #00000000,
+          #ffffff
+        );
+      }
+      10% {
+        background: radial-gradient(
+          at top right,
+          rgba(245, 203, 167, 0.2),
+          rgba(235, 152, 78, 0.28),
+          #00000000,
+          #ffffff
+        );
+      }
+      20% {
+        background: radial-gradient(
+          at top right,
+          rgba(245, 203, 167, 0.15),
+          rgba(235, 152, 78, 0.21),
+          #00000000,
+          #ffffff
+        );
+      }
+      30% {
+        background: radial-gradient(
+          at top right,
+          rgba(245, 203, 167, 0.1),
+          rgba(235, 152, 78, 0.14),
+          #00000000,
+          #ffffff
+        );
+      }
+      40% {
+        background: radial-gradient(
+          at top right,
+          rgba(245, 203, 167, 0.05),
+          rgba(235, 152, 78, 0.07),
+          #00000000,
+          #ffffff
+        );
+      }
+      50% {
+        background: radial-gradient(
+          at top right,
+          rgba(245, 203, 167, 0),
+          rgba(235, 152, 78, 0),
+          #00000000,
+          #ffffff
+        );
+      }
+      60% {
+        background: radial-gradient(
+          at top right,
+          rgba(245, 203, 167, 0.05),
+          rgba(235, 152, 78, 0.07),
+          #00000000,
+          #ffffff
+        );
+      }
+      70% {
+        background: radial-gradient(
+          at top right,
+          rgba(245, 203, 167, 0.1),
+          rgba(235, 152, 78, 0.14),
+          #00000000,
+          #ffffff
+        );
+      }
+      80% {
+        background: radial-gradient(
+          at top right,
+          rgba(245, 203, 167, 0.15),
+          rgba(235, 152, 78, 0.21),
+          #00000000,
+          #ffffff
+        );
+      }
+      90% {
+        background: radial-gradient(
+          at top right,
+          rgba(245, 203, 167, 0.2),
+          rgba(235, 152, 78, 0.28),
+          #00000000,
+          #ffffff
+        );
+      }
+      100% {
+        background: radial-gradient(
+          at top right,
+          rgba(245, 203, 167, 0.25),
+          rgba(235, 152, 78, 0.35),
+          #00000000,
+          #ffffff
+        );
+      }
+    }
+
+    /* Aplicar la animación  */
+    .color-transition {
+      animation: gradientAnimation 10s linear infinite;
+    }
+  </style>
+
+  <section
+    id="hero-home"
+    class=`color-transition z-0 bg-cover bg-center pt-44 md:pt-20 mb-20 sm:mb-2 sm:pb-20 bg-transparent`
+  >
+    <div class=""></div>
+
+    <div
+      class="container flex flex-col justify-left p-4 mx-auto sm:py-12 lg:py-2 lg:justify-around px-4 sm:px-40"
+    >
+      <h1
+        class="text-black1 font-Inter text-[40px] sm:text-[80px] font-medium leading-[48px] sm:leading-[96px] tracking-[-0.045em] pt-8 sm:pt-20"
+      >
+        {blok.headline}
+      </h1>
+      <div class="flex flex-col sm:flex-row gap-0">
+        <div
+          class="flex flex-col order-1 justify-left p-0 sm:p-6 text-left rounded-sm"
+        >
+          <p
+            class="text-black2 font-Inter text-[14px] sm:text-[16px] font-medium leading-[25.28px] sm:leading-[28.8px] tracking-[0em] text-justify mt-6 mb-8 sm:mb-4 sm:py-16"
+          >
+            {blok.subheadline}
+          </p>
+          <div
+            class="flex sm:pb-10 sm:items-left sm:justify-left sm:flex-row sm:space-y-0 sm:space-x-4 w-full"
+          >
+            {
+              blok.buttons.map((button) => {
+                return (
+                  <div class="w-full sm:w-auto">
+                    <ButtonItem blok={button} fullWidth />
+                  </div>
+                );
+              })
+            }
+          </div>
+          <div
+            class="text-black2 font-Inter text-[14px] sm:text-[16px] font-medium leading-[25.28px] sm:leading-[28.8px] tracking-[0em] pt-16 sm:pt-36"
+          >
+            {blok.companies_text}
+          </div>
+          <div class="flex flex-row justify-left">
+            {
+              blok.companies_logos.map((company) => (
+                <div class="flex items-left justify-left py-4 md:py-1 opacity-40">
+                  <img
+                    src={company.filename}
+                    alt={company.alt}
+                    width="140"
+                    height="75"
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div
+          class="flex order-1 sm:order-2 items-center justify-center mt-2 sm:mt-8 lg:mt-0 h-72 sm:h-full pt-0 sm:py-20"
+        >
+          <img
+            src={blok.image.filename}
+            alt="Hero Image"
+            class="object-contain"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

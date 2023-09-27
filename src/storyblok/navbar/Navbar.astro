@@ -1,0 +1,119 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import ButtonItem from "../ButtonItem.astro";
+import Navlink from "./Navlink.astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <nav id="navigationBar" class="bg-transparent fixed w-full z-10">
+    <div
+      class="max-w-screen-2xl flex flex-wrap sm:flex-nowrap items-center justify-between mx-auto px-4 sm:px-[70px] gap-0 sm:gap-2 py-2"
+    >
+      <div class="flex items-center gap-2">
+        <a href="#" class="flex items-center">
+          <div
+            class="flex items-center flex-shrink-0 text-white"
+            id="logo-container"
+          >
+          </div>
+        </a>
+        <button class="inline-flex items-center md:hidden" id="menu-toggle">
+          <img src="/hamburger-icon.svg" alt="Menu Hamburger" />
+        </button>
+      </div>
+      <div class="hidden w-full md:block md:w-auto" id="menu-items">
+        <ul
+          class="flex flex-col p-0 md:p-0 md:flex-row sm:space-x-2 md:space-x-2 lg:space-x-16 md:mt-0"
+        >
+          {
+            blok.navbar_links.map((blok) => {
+              return <Navlink blok={blok} />;
+            })
+          }
+        </ul>
+      </div>
+      <div class="flex gap-4">
+        {
+          blok.navbar_buttons.map((blok) => {
+            return <ButtonItem blok={blok} />;
+          })
+        }
+      </div>
+    </div>
+  </nav>
+</div>
+
+<script define:vars={{ blok }}>
+  const menuToggle = document.getElementById("menu-toggle");
+  const menuItems = document.getElementById("menu-items");
+  const logoContainer = document.getElementById("logo-container");
+
+  let win = this;
+
+  menuToggle.addEventListener("click", () => {
+    menuItems.classList.toggle("hidden");
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    let logoImage = new Image();
+    logoImage.classList.add("w-36");
+    if (win.innerWidth > 1020) {
+      logoImage.src = blok.navbar_logo?.filename;
+      logoImage.id = "logo-image";
+      logoContainer.appendChild(logoImage);
+    } else {
+      logoImage.src = blok.navbar_mobile_logo?.filename;
+      logoImage.id = "logo-image";
+      logoContainer.appendChild(logoImage);
+    }
+  });
+
+  window.addEventListener("resize", function () {
+    const logoImage = document.getElementById("logo-image");
+    if (win.innerWidth > 1020) {
+      logoImage.setAttribute("src", blok.navbar_logo?.filename);
+    } else {
+      logoImage.setAttribute("src", blok.navbar_mobile_logo?.filename);
+    }
+  });
+
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute("href"));
+      let offset;
+      if (window.innerWidth < 768) {
+        offset = 24;
+        menuItems.classList.add("hidden");
+      } else {
+        offset = 96;
+      }
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - offset,
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+
+  //APARECE Y DESAPARECE EL MENU CUANDO EL SCROLL SE MUEVE HACIA ARRIBA O HACIA ABAJO
+  let prevScrollPos = window.scrollY;
+  const navBar = document.getElementById("navigationBar");
+  const headerHeight = navBar.offsetHeight + 8;
+
+  window.addEventListener("scroll", () => {
+    const currentScrollPos = window.scrollY;
+    const scrolledUp = currentScrollPos < prevScrollPos;
+
+    if (scrolledUp) {
+      navBar.style.top = "0";
+    } else {
+      navBar.style.top = `-${headerHeight}px`;
+    }
+
+    prevScrollPos = currentScrollPos;
+  });
+</script>

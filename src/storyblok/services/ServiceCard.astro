@@ -1,0 +1,38 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <section
+    id="serviceCard"
+    class={"serviceCardClass bg-white rounded-2xl md:cursor-pointer border border-[#FFFFFF14] hover:border-black2 max-w-sm lg:h-[400px] lg:max-w-md"}
+  >
+    <div class="lg:h-[400px]">
+      <div class="flex justify-center">
+        <img
+          class="service-image transition duration-500 ease-in-out w-1/4"
+          src={blok.image.filename}
+          alt={blok.image.alt}
+        />
+      </div>
+
+      <div class="px-5 py-0">
+        <p
+          class="text-black1 font-Inter text-[16px] sm:text-[18px] font-normal leading-[20.8px] sm:leading-[23.4px] tracking-[-0.027em] text-center pt-1 pb-2"
+        >
+          {blok.headline}
+        </p>
+
+        <div class="px-5 py-0">
+          <p
+            class="text-black2 font-Inter text-[14px] sm:text-[16px] font-normal leading-[28.8px] sm:leading-[25.2px] tracking-[0em] text-justify pt-1 pb-2"
+          >
+            {blok.text}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

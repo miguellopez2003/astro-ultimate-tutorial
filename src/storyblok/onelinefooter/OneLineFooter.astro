@@ -1,0 +1,41 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import SocialLogo from "./SocialLogo.astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)} class="bg-black">
+  <div class="w-full sm:w-4/5 sm:mx-[180px] h-[.5px] bg-white"></div>
+  <footer
+    class="bg-black flex flex-col sm:flex-row sm:justify-between px-5 sm:px-48 pb-2 pt-2"
+  >
+    <div class="flex place-content-center md:content-center py-4 sm:py-4">
+      <img
+        class="w-[40px] h-[40px]"
+        src={blok.logo?.filename}
+        alt={blok.logo?.alt}
+      />
+    </div>
+
+    <p
+      class="text-whitetitle text-xs sm:text-sm text-center sm:text-left font-Inter font-medium py-4 sm:py-6"
+    >
+      Copyright &copy;
+      <span id="dateyear"></span>
+      <script define:vars={{ blok }}>
+        const currentyear = new Date().getFullYear();
+        const dateyear = currentyear.toString();
+        document.getElementById("dateyear").textContent = dateyear;
+      </script>
+      Tech Stack. All Rights Reserved.
+      <span>
+        <a
+          id="privatepolicybutton"
+          class="inline-block hover:underline"
+          href={blok.privatePolicyLink.cached_url}>Privacy Policy</a
+        >
+      </span>
+    </p>
+  </footer>
+</div>

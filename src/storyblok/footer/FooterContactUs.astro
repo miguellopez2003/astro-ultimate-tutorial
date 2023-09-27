@@ -1,0 +1,44 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import ContactItem from "./ContactItem.astro";
+
+const { blok } = Astro.props;
+const backgroundImage = blok.backgroundImage.filename;
+---
+
+<div {...storyblokEditable(blok)} class="bg-white">
+  <section class="bg-transparent p-5 sm:p-0 absolute" id="contactus">
+    <div
+      class="bg-gradient-to-tr from-[#F0B27A] via-[#EB984E] to-[#EB984E] bg-transparent text-black px-5 sm:px-20 py-12 bg-contain md:mx-60 md:my-0 rounded-xl"
+      style=`background-position: center;`
+    >
+      <div class="flex flex-col sm:flex-row sm:gap-16 sm:justify-items-start">
+        <div class="flex flex-col sm:w-3/5 sm:py-4">
+          <h2
+            class="text-white font-Inter text-[24px] sm:text-[48px] font-medium leading-[29px] sm:leading-[58px] tracking-[-0.045em] sm:mb-4 text-left py-1"
+          >
+            {blok.headline1}
+          </h2>
+          <h2
+            class="text-white font-Inter text-[14px] sm:text-[16px] font-medium leading-[21px] sm:leading-[21px] tracking-[0em] text-justify sm:mb-4 pb-1"
+          >
+            {blok.headline2}
+          </h2>
+        </div>
+        <div
+          class="flex flex-col sm:w-2/5 sm:py-0 sm:space-y-6 justify-items-center"
+        >
+          <p
+            class="flex flex-col text-sm sm:text-lg text-left letter-spacing: -0.01em; pb-1"
+          >
+            {
+              blok.contactUs?.map((blok) => {
+                return <ContactItem blok={blok} />;
+              })
+            }
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,61 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import AboutItem from "./AboutItem.astro";
+import SocialItem from "./SocialItem.astro";
+import TermsItem from "./TermsItem.astro";
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <footer
+    class="bg-black px-5 sm:px-20 pt-48 sm:pt-48 pb-12 mb-0 mt-[200px] sm:mt-[160px] flex justify-center"
+  >
+    <div class="mx-12 md:pl-20 py-0 text-center md:text-left">
+      <div class="grid-1 grid gap-4 sm:gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <!-- About Us Section -->
+        <div>
+          <p
+            class="text-whitetitle font-Inter text-[13px] sm:text-[14px] font-normal leading-[24px] sm:leading-[25px] tracking-[-0.027em] text-left pb-2 mb-0"
+          >
+            {blok.company}
+          </p>
+          {
+            blok.about_us?.map((blok) => {
+              return <AboutItem blok={blok} />;
+            })
+          }
+        </div>
+        <!-- Terms Of Service Section -->
+        <div class="sm:pl-4">
+          <p
+            class="text-whitetitle font-Inter text-[13px] sm:text-[14px] font-normal leading-[24px] sm:leading-[25px] tracking-[-0.027em] text-left pb-2 mb-0"
+          >
+            {blok.legal}
+          </p>
+          {
+            blok.terms?.map((blok) => {
+              return <TermsItem blok={blok} />;
+            })
+          }
+        </div>
+        <!-- Social Media Section -->
+        <div class="sm:pl-20">
+          <p
+            class="text-whitetitle font-Inter text-[13px] sm:text-[14px] font-normal leading-[24px] sm:leading-[25px] tracking-[-0.027em] text-left pb-2 mb-0"
+          >
+            {blok.social}
+          </p>
+          <div class="items-start">
+            <span class="flex-row gap-10 py-4">
+              {
+                blok.socials?.map((blok) => {
+                  return <SocialItem blok={blok} />;
+                })
+              }
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

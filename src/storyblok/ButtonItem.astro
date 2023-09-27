@@ -1,0 +1,44 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+
+const { blok, fullWidth } = Astro.props;
+---
+
+<div {...storyblokEditable(blok), fullWidth}>
+  {
+    blok.button_style === "primary" ? (
+      <a
+        href={blok.button_link.url}
+        target="_blank"
+        class={`text-white font-Inter text-[14px] sm:text-[16px] font-medium leading-[16px] sm:leading-[16px] tracking-[0em]
+          cursor-pointer bg-naranjamedio px-[27px] sm:px-[30px] py-[2px] sm:py-[12px]
+           rounded-full hover:text-white hover:bg-black ${
+          fullWidth && "w-full sm:w-auto"
+        }`}
+      >
+        {blok.button_label}
+      </a>
+    ) : blok.button_style === "secondary" ? (
+      <a
+        href={blok.button_link.url}
+        target="_blank"
+        class={`font-Inter text-white text-sm sm:text-base bg-naranjamedio p-3 sm:px-5 sm:p-3 ${
+          fullWidth && "w-full sm:w-auto"
+        }`}
+      >
+        {blok.button_label}
+      </a>
+    ) : (
+      <a
+        href={blok.button_link.url}
+        target="_blank"
+        class={`flex justify-center items-center gap-2 font-Inter font-bold border-2 border-white text-sm sm:text-base px-2 py-2 sm:px-5 sm:py-3 ${
+          fullWidth && "w-full sm:w-auto"
+        }`}
+      >
+        <img src="/play-icon.svg" alt="" />
+        {blok.button_label}
+      </a>
+    )
+  }
+</div>

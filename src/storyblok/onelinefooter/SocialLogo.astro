@@ -1,0 +1,18 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)} class="flex gap-4 py-4">
+  <a href={blok.link.cached_url} class="hover:text-naranjamedio"
+    >{
+      (
+        <img
+          class="w-[30px]"
+          src={blok.image?.filename}
+          alt={blok.image?.alt}
+        />
+      )
+    }</a
+  >
+</div>

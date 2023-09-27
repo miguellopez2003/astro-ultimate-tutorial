@@ -1,0 +1,26 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import ServiceCard from "./ServiceCard.astro";
+
+const { blok } = Astro.props;
+---
+
+<style>
+  .bg-lightblue {
+    background-color: #0ba5ec;
+  }
+</style>
+
+<div {...storyblokEditable(blok)} class="bg-white m-4">
+  <section id="services" class={`pt-0 px-2 md:px-6`}>
+    {
+      (
+        <div class="py-5 md:py-2 px-5 md:px-20 flex flex-col md:flex-row justify-center gap-8 md:gap-10">
+          {blok.cards.map((item) => {
+            return <ServiceCard blok={item} />;
+          })}
+        </div>
+      )
+    }
+  </section>
+</div>

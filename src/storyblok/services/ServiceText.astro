@@ -1,0 +1,25 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)} class="bg-white">
+  <div
+    id="serviceText"
+    class="px-4 py-6 sm:py-16 mb-0 scroll-mt-64 md:scroll-mt-24"
+  >
+    <div class="mt-0 sm:mt-12 lg:mt-0 md:mx-40 my-0">
+      <h3
+        class="text-naranjamedio font-Inter text-[14px] sm:text-[16px] font-medium leading-[19.6px] sm:leading-[22.4px] tracking-[-0.015em] mb-4 text-center"
+      >
+        {blok.title}
+      </h3>
+      <h2
+        class="text-black1 font-Inter text-[30px] sm:text-[56px] font-medium leading-[36px] sm:leading-[67.2px] tracking-[-0.045em] text-center mb-0"
+      >
+        {blok.headline}
+      </h2>
+    </div>
+  </div>
+</div>

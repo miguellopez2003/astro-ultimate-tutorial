@@ -1,0 +1,104 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import ButtonItem from "./ButtonItem.astro";
+
+const { blok } = Astro.props;
+
+const idimagetextsection = ["missionvision", "approach", "benefits"];
+const headlinesection = ["Mission&Vision", "Approach", "Benefits"];
+---
+
+<div {...storyblokEditable(blok)}>
+  <section
+    id={`${
+      blok.item_description === headlinesection[0]
+        ? idimagetextsection[0]
+        : blok.item_description === headlinesection[1]
+        ? idimagetextsection[1]
+        : blok.item_description === headlinesection[2]
+        ? idimagetextsection[2]
+        : ""
+    }`}
+    class={`${
+      blok.background_color === "dark" ? "bg-lightgray text-black" : "bg-white"
+    }`}
+  >
+    {
+      blok.reverse_layout ? (
+        <div class="py-2 sm:py-12 text-left lg:text-left px-3 sm:px-40">
+          <div class="container mx-auto xl:px-12">
+            <div class="grid lg:grid-cols-2 gap-2 sm:gap-12 items-center pt-5">
+              <div class="m-auto flex place-content-start">
+                <img
+                  src={blok.image.filename}
+                  alt={blok.image.alt}
+                  class="w-[588px] p-[20px]"
+                />
+              </div>
+              <div class="sm:p-0 mt-0 sm:mt-10 lg:mt-0">
+                <p
+                  class="text-naranjamedio font-Inter text-[14px] sm:text-[16px] font-medium leading-[19.6px] sm:leading-[22.4px] tracking-[-0.015em] text-justify
+                mb-4"
+                >
+                  {blok.item_description}
+                </p>
+                <h2
+                  class="text-black1 font-Inter text-[22px] sm:text-[40px] font-medium leading-[28.6px] sm:leading-[52px] tracking-[-0.027em] text-justify
+                mb-4"
+                >
+                  {blok.headline}
+                </h2>
+                <p
+                  class="text-black2 font-Inter text-[14px] sm:text-[16px] font-medium leading-[25.2px] sm:leading-[28.8px] tracking-[0em] text-justify
+                mb-8"
+                >
+                  {blok.text}
+                </p>
+                {blok.button.map((item) => {
+                  return <ButtonItem blok={item} fullWidth />;
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div class="px-6 py-16 md:px-8 text-center lg:text-left">
+          <div class="container mx-auto xl:px-12">
+            <div class="grid lg:grid-cols-2 gap-2 sm:gap-12 items-left pt-5">
+              <div class="sm:p-0 mt-0 sm:mt-10 lg:mt-0">
+                <p
+                  class="text-naranjamedio font-Inter text-[14px] sm:text-[16px] font-medium leading-[19.6px] sm:leading-[22.4px] tracking-[-0.015em] text-justify
+                mb-4"
+                >
+                  {blok.item_description}
+                </p>
+                <h2
+                  class="text-black1 font-Inter text-[22px] sm:text-[40px] font-medium leading-[28.6px] sm:leading-[52px] tracking-[-0.027em] text-justify
+                mb-4"
+                >
+                  {blok.headline}
+                </h2>
+                <p
+                  class="text-black2 font-Inter text-[14px] sm:text-[16px] font-medium leading-[25.2px] sm:leading-[28.8px] tracking-[0em] text-justify
+                mb-8"
+                >
+                  {blok.text}
+                </p>
+                {blok.button.map((item) => {
+                  return <ButtonItem blok={item} fullWidth />;
+                })}
+              </div>
+              <div class="order-1 sm:order-none lg:mb-0 flex place-content-center">
+                <img
+                  src={blok.image.filename}
+                  alt={blok.image.alt}
+                  class="w-[588px] p-[20px]"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  </section>
+</div>
